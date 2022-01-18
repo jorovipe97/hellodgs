@@ -1,0 +1,46 @@
+type Query {
+    shows(titleFilter: String, offset: Int, limit: Int, sort: String): [Show]
+    advertiser(name: String): Advertiser
+    adset(id: ID): AdSet
+    adsetByAdvertiserName(name: String): AdSet
+    allAdSetsByAdvertiserName(name: String): [AdSet]
+}
+
+type AdSet {
+    id: ID
+    advertiserName: String
+    lastModifiedBy: String
+    properties: AdSetProperties
+}
+
+type AdSetProperties {
+    workbenchName: String
+    bookmaker: String
+}
+
+type Advertiser {
+    name: String
+    lastUpdatedBy: String
+    properties: Properties
+}
+
+type Properties {
+    globalAssets: String
+    oddsFormat: String
+    customerAssets: String
+    workbenchName: String
+    bookmaker: String
+    highestPriceSelected: String
+}
+
+type Show {
+    id: ID
+    title: String
+    releaseYear: Int
+    actors: [Actor]
+}
+
+type Actor {
+    name: String!
+    age: Int
+}
