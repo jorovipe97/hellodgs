@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+
+# by default runs on 5432 port
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    # To create the table on startup.
+    # https://stackoverflow.com/questions/38713597/create-table-in-postgresql-docker-image/38714511
+    volumes:
+      - ./create-adsets-table.sql:/docker-entrypoint-initdb.d/create-adsets-table.sql
+
+    ports:
+      - 5432:5432
+
+  # Very horrible looking db admin
+  adminer:
+    image: adminer
+    restart: always
+    # Map host 8081 port to container 8080 port.
+    # https://docs.docker.com/compose/networking/
+    ports:
+      - 8081:8080
