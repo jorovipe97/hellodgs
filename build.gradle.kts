@@ -38,7 +38,7 @@ dependencies {
 	implementation("software.amazon.awssdk:dynamodb-enhanced")
 
 	implementation(platform("software.amazon.awssdk:bom:2.17.112"))
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	// developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -1,5 +1,21 @@
 type Query {
     shows(titleFilter: String): [Show]
+    advertiser(name: String): Advertiser
+}
+
+type Advertiser {
+    name: String
+    lastUpdatedBy: String
+    properties: Properties
+}
+
+type Properties {
+    globalAssets: String
+    oddsFormat: String
+    customerAssets: String
+    workbenchName: String
+    bookmaker: String
+    highestPriceSelected: String
 }
 
 type Show {
