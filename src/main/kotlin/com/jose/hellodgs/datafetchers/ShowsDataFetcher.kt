@@ -33,14 +33,25 @@ class ShowsDataFetcher {
     private val actorsService = ActorsService()
 
     @DgsQuery
-    fun shows(@InputArgument titleFilter : String?): List<Show> {
-        return if (titleFilter != null) {
-            shows.filter { show ->  show.title!!.contains(titleFilter) }
+    fun shows(
+        @InputArgument titleFilter : String?,
+        @InputArgument offset : Int?,
+        @InputArgument limit : Int?,
+        // Sort is ignored only defined for example purposes.
+        @InputArgument sort : String?,
+    ): List<Show> {
+        val _limit = limit ?: 10
+        val startIndex = offset ?: 0
+        val endIndex = startIndex + if (shows.count() > _limit) _limit - 1 else shows.count() - 1
+        var result = shows.slice(startIndex ..Math.min(endIndex, shows.count() - 1))
+
+        if (titleFilter != null) {
+            result = result.filter { show ->  show.title!!.contains(titleFilter) }
             // Can also be written in this form.
             // shows.filter { it.title.contains(titleFilter) }
-        } else {
-            shows
         }
+
+        return result
     }
 
     // What if there is an extra cost to specific fields? For example, what if loading actors for a show requires an extra query? It would be wasteful to run the extra query to load actors if the actors field doesn't get returned to the user.

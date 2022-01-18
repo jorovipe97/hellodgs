@@ -1,5 +1,5 @@
 type Query {
-    shows(titleFilter: String): [Show]
+    shows(titleFilter: String, offset: Int, limit: Int, sort: String): [Show]
     advertiser(name: String): Advertiser
 }
 
