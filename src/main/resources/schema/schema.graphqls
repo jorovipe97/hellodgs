@@ -1,6 +1,21 @@
 type Query {
     shows(titleFilter: String, offset: Int, limit: Int, sort: String): [Show]
     advertiser(name: String): Advertiser
+    adset(id: ID): AdSet
+    adsetByAdvertiserName(name: String): AdSet
+    allAdSetsByAdvertiserName(name: String): [AdSet]
+}
+
+type AdSet {
+    id: ID
+    advertiserName: String
+    lastModifiedBy: String
+    properties: AdSetProperties
+}
+
+type AdSetProperties {
+    workbenchName: String
+    bookmaker: String
 }
 
 type Advertiser {

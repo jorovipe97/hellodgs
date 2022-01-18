@@ -1,9 +1,10 @@
 package com.jose.hellodgs.datafetchers
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.jose.hellodgs.models.Advertiser
+import com.jose.hellodgs.entities.Advertiser
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsQuery
+import com.netflix.graphql.dgs.InputArgument
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable
 import software.amazon.awssdk.enhanced.dynamodb.Key
@@ -20,7 +21,11 @@ import software.amazon.awssdk.services.dynamodb.model.DynamoDbException
 class AdvertiserDataFetcher {
 
     @DgsQuery
-    fun advertiser(name: String): Advertiser? {
+    fun advertiser(
+        @InputArgument name: String?
+    ): Advertiser? {
+        if (name == null) return null
+
         val region: Region = Region.EU_WEST_1
         val ddb = DynamoDbClient.builder()
             .region(region)

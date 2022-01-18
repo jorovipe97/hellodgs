@@ -14,6 +14,9 @@ INSERT INTO public.adsets(advertiser_name, last_modified_by, properties)
 VALUES ('Betly', 'The CICD Pipeline 2', '{"workbenchName": "Betly", "bookmaker": "1020"}');
 
 INSERT INTO public.adsets(advertiser_name, last_modified_by, properties)
+VALUES ('Betly', 'The Mega AdSet', '{"workbenchName": "Betly", "bookmaker": "1020"}');
+
+INSERT INTO public.adsets(advertiser_name, last_modified_by, properties)
 VALUES ('BetPlay', 'The CICD Pipeline 3', '{"workbenchName": "BetPlay", "bookmaker": "1036"}');
 
 INSERT INTO public.adsets(advertiser_name, last_modified_by, properties)
