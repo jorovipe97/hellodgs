@@ -3,7 +3,9 @@ package com.jose.hellodgs.entities
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.hibernate.annotations.Type
 import java.io.IOException
+import java.io.Serializable
 import javax.persistence.*
 
 
@@ -13,6 +15,8 @@ import javax.persistence.*
 // TODO: Use generic classes.
 @Converter(autoApply = true)
 class JpaConverterJson : AttributeConverter<AdSetProperties?, String?> {
+    // To json columns you need to set this:
+    // https://stackoverflow.com/questions/32238508/writing-to-json-column-of-postgres-database-using-spring-jpa
     override fun convertToDatabaseColumn(meta: AdSetProperties?): String? {
         return try {
             objectMapper.writeValueAsString(meta)
@@ -38,7 +42,7 @@ class JpaConverterJson : AttributeConverter<AdSetProperties?, String?> {
 
 @Entity
 @Table(name = "adsets")
-data class AdSet (
+class AdSet (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -55,7 +59,7 @@ data class AdSet (
     }
 }
 
-data class AdSetProperties(
+class AdSetProperties(
     @JsonProperty("workbenchName")
     var workbenchName: String?,
     @JsonProperty("bookmaker")
