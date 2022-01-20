@@ -18,22 +18,15 @@ import software.amazon.awssdk.services.dynamodb.model.DynamoDbException
 // https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/dynamodb/src/main/java/com/example/dynamodb/EnhancedGetItem.java
 
 @DgsComponent
-class AdvertiserDataFetcher {
+class AdvertiserDataFetcher(
+    private val enhancedClient: DynamoDbEnhancedClient
+) {
 
     @DgsQuery
     fun advertiser(
         @InputArgument name: String?
     ): Advertiser? {
         if (name == null) return null
-
-        val region: Region = Region.EU_WEST_1
-        val ddb = DynamoDbClient.builder()
-            .region(region)
-            .build()
-
-        val enhancedClient = DynamoDbEnhancedClient.builder()
-            .dynamoDbClient(ddb)
-            .build()
 
         val result: Advertiser? = getItem(enhancedClient, name)
         println(result?.name)
@@ -44,6 +37,7 @@ class AdvertiserDataFetcher {
         return result
     }
 
+    // This could be moved to a repository.
     fun getItem(enhancedClient: DynamoDbEnhancedClient, advertiserName: String?): Advertiser? {
         if (advertiserName == null) return null
 
