@@ -18,6 +18,10 @@ repositories {
 	mavenCentral()
 }
 
+// About the allOpen plugin
+// https://stackoverflow.com/a/58470332
+// Basically marks all clases anotated with these annotations
+// to be open, by default kotlin classes are sealed.
 allOpen {
 	annotation("javax.persistence.Entity")
 	annotation("javax.persistence.Embeddable")

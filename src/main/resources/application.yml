@@ -1,0 +1,21 @@
+# The application.yml file and the appropriate application-${profile}.properties both get loaded and merged into the environment.
+# https://stackoverflow.com/questions/25231918/does-spring-boot-support-using-both-properties-and-yml-files-at-the-same-time
+# https://www.tutorialspoint.com/spring_boot/spring_boot_application_properties.htm
+spring:
+  application:
+    name: syndication-api
+
+aws:
+  dynamo:
+    table-name: fep-adverts
+    region: eu-west-1
+    endpoint: false
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: 'dev'
+  application:
+    name: syndication-api
